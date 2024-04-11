@@ -1,5 +1,3 @@
-import { a } from "../../../../node_modules/vite/dist/node/types.d-jgA8ss1A";
-
 class Key {
   private signature: number = Math.random();
 
@@ -19,8 +17,8 @@ class Person {
 }
 
 abstract class House {
-  constructor(public door: boolean, public key: Key) {}
-
+  constructor(public key: Key) {}
+  door: boolean;
   tenants: string[] = [];
 
   comeIn(person) {
@@ -32,14 +30,10 @@ abstract class House {
 
   abstract openDoor(key): void;
 }
-class MyHouse extends House {
-  constructor(key) {
-    super(false, key);
-    this.key = key;
-  }
 
-  openDoor(key: any) {
-    if (this.key === key) {
+class MyHouse extends House {
+  openDoor(key) {
+    if (this.key.getSignature() === key) {
       this.door = true;
       console.log(`Welcome houme`);
     } else {
