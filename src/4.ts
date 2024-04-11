@@ -19,8 +19,8 @@ class Person {
 }
 
 abstract class House {
-  door: boolean;
-  key = new Key();
+  constructor(public door: boolean, public key: Key) {}
+
   tenants: string[] = [];
 
   comeIn(person) {
@@ -34,8 +34,7 @@ abstract class House {
 }
 class MyHouse extends House {
   constructor(key) {
-    super();
-
+    super(false, key);
     this.key = key;
   }
 
@@ -43,7 +42,6 @@ class MyHouse extends House {
     if (this.key === key) {
       this.door = true;
       console.log(`Welcome houme`);
-      console.log(this.tenants[0]);
     } else {
       console.log("Wrong key");
     }
